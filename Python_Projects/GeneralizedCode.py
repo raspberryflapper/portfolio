@@ -1,3 +1,16 @@
+"""
+READ:
+SeHwan Kim
+11.10.2024
+
+
+This is an example of an ODE solver. Runge Kutta of Order 4 (i.e. RK4) was implemented to
+solve a complex system of ODE for breast cancer stem cell growth/model. Parameters
+are randmized and the code effectively searches and solves for the optimal approximate
+solutions to the system of ODEs. This project was done in Summer of 2023 with my
+undergraduate collaborators for a research project.
+"""
+
 import random
 import numpy as np
 

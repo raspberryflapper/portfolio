@@ -1,3 +1,24 @@
+"""
+READ:
+SeHwan Kim
+11.10.2024
+
+
+This code is for data fitting multiple lab data sets with multiple fitting functions.
+The data is fitted in the least square sense
+with Steepest Gradient Descent as the optimizer. Hence, bisection method is incorporated
+in order to search and find the optimal learning rate each iteration of the gradient descent.
+
+In this example, the user is allowed to pick which data they would like to fit. Based on user selection,
+the code will fit the data. Each data set was from the collaborating lab and they each represent and show
+unique characteristics. Each data set represent different lab scenarios (in vitro/in silico) where cell
+signaling is either enabled or blocked to observe their effect on tumor growth. The code minimizes the
+cost function (least square) and find the optimal paramter values of our target fuction.
+
+This project was done in Summer of 2024 with my
+undergraduate collaborators for a research project.
+"""
+
 import numpy as np
 import math
 import matplotlib.pyplot as plt

@@ -1,3 +1,22 @@
+"""
+READ:
+SeHwan Kim
+11.9.2024
+
+
+This code was written (rather quickly) as a request from my advisor. Our lab partner
+needed his data fitted; the data represented different tumor growth in size in patients in the lab.
+
+In this code, the lab data was imported from a CSV file, rather than directly
+written as shown in different codes in this folder. The mean of patients' data was fit accordingly.
+From there, the data was fitted with the Beta Distribution function and Linear function,
+our target functions, with the Steepest Gradient Descent incorporating the Bisection method to
+solve the optimal alpha (learning rate). The error, the cost function, was calculated in terms of
+least square.
+
+This project was done in the Fall of 2024.
+"""
+
 import numpy as np
 import math
 import matplotlib.pyplot as plt

@@ -1,22 +1,25 @@
 """
 READ:
 SeHwan Kim
-06.19.204
+11.10.2024
 
-runs now with 4 different for loops previously used is consolidated into one single for loop for
-efficiency. Complex terms (e.g. multiple "np.exp()" in a single term) are
+
+This code is for data fitting certain sets of data. The data is fitted in the least square sense
+with Gradient Descent as the optimizer. In this example,
+based on the lab data provided, tumor growth effected by HER2 cell signaling, we suspect a certain
+mathematical function would fit the data. The data is normalized first
+and Gradient Descent is used to find the unknown parameters to
+minimize the cost function (i.e.e the least square error).
+
+This project was done in Summer of 2024 with my
+undergraduate collaborators for a research project.
+
+Complex terms (e.g. multiple "np.exp()" in a single term) are
 delegated to variables rather than typed out for readability and to minimize
 any compiler/calculation issues (used parenthesis heavilty to separate variables and
-calculations as much as possible).
-
-runs and reproduces the same results as before. left (just commented out) the 
-4 different for loops in just in case.
+calculations as much as possible) in the code.
 """
 
-"""
-tbc:
-Lagrange int implementation:
-"""
 
 import numpy as np
 import math
