@@ -9,7 +9,6 @@ utilizes DNN to solve the system and plots the approximate solutions
 against the exact solutions. Each functions loss is calculated with MSE
 and the average of the two losses is taken to be the cost function. The DNN
 uses 64 neurons for 2 hidden layers and ReLu as the activation function for both layers.
-
 '''
 import torch
 import torch.nn as nn
