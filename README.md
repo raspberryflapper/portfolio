@@ -7,7 +7,8 @@ what I have done and do in my research field and spare time with two main langua
 Mainly, I use coding skills to optimize and fit data (e.g. lab data of tumor growth)
 and solve Ordinary Differential Equations, using well known methods such as Runge Kutta, finite difference, 
 and Euler's method. Recently, I have been using Neural Network (NN) and Deep Neural Network (DNN) 
-with PyTorch to solve systems of ODEs. These DNN codes will be uploaded soon.
+with PyTorch to solve systems of ODEs - which will be fully implemented for my current research topic
+of computational biology (T-Cell modeling and its effect on tumor growth).
 
 This reposit is divided into two main folders:
 
