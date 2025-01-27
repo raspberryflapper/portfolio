@@ -8,7 +8,7 @@ Mainly, I use coding skills to optimize and fit data (e.g. lab data of tumor gro
 and solve Ordinary Differential Equations, using well known methods such as Runge Kutta, finite difference, 
 and Euler's method. Recently, I have been using Deep Neural Network (DNN) with PyTorch to solve systems of ODEs.
 Currently, my DNN algorithm can take in real-world lab data and solve a complex system of ODE/biological models
-with undetermined coefficients.
+with undetermined coefficients while finding the optimal values for the unknown parameters.
 
 This reposit is divided into two main folders:
 
