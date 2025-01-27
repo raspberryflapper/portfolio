@@ -6,15 +6,16 @@ Thanks for taking your time and viewing my portfolio. This is a porfolio to demo
 what I have done and do in my research field and spare time with two main languages- Python and C++.
 Mainly, I use coding skills to optimize and fit data (e.g. lab data of tumor growth)
 and solve Ordinary Differential Equations, using well known methods such as Runge Kutta, finite difference, 
-and Euler's method. Recently, I have been using Neural Network (NN) and Deep Neural Network (DNN) 
-with PyTorch to solve systems of ODEs - which will be fully implemented for my current research topic
-of computational biology (T-Cell modeling and its effect on tumor growth).
+and Euler's method. Recently, I have been using Deep Neural Network (DNN) with PyTorch to solve systems of ODEs.
+Currently, my DNN algorithm can take in real-world lab data and solve a complex system of ODE/biological models
+with undetermined coefficients.
 
 This reposit is divided into two main folders:
 
 In the Python folder -  you will find codes utilizing variety of numerical methods and algorithms, such as 
 Gradient Descent, Steepest Gradient Descent, Newton's method, Thomas algorithm, and Bisection method, 
-for optimization, data fitting, and solving for the optimal learning rate. In different projects/codes,
+for optimization, data fitting, and solving for the optimal learning rate. In addition, the folder with
+DNN algorithms contain algorithms developed for my current research papers. In different projects/codes,
 reader can observe different skillsets used, whether that be fitting a data in the Least Square sense or
 handling a Jacobian matrix to solve a second order ODE with the second order finite difference method. Lastly,
 some codes are written for calculating the Residual Square Sum for an analysis of the found optimal parameters and
