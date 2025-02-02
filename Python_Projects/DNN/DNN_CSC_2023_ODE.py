@@ -64,6 +64,23 @@ class SimpleDNN(nn.Module):
         # output layer 64 to 2 for x0,...,x3
         self.fc3 = nn.Linear(64,4)
         
+        # Raw parameters for (p, q), constrained to sum ≤ 1
+        self.raw_p0 = nn.Parameter(torch.tensor(0.4).logit(), requires_grad=True)
+        self.raw_q0 = nn.Parameter(torch.tensor(0.4).logit(), requires_grad=True)
+        self.raw_p1 = nn.Parameter(torch.tensor(0.045).logit(), requires_grad=True)
+        self.raw_q1 = nn.Parameter(torch.tensor(0.4).logit(), requires_grad=True)
+        self.raw_p2 = nn.Parameter(torch.tensor(0.16).logit(), requires_grad=True)
+        self.raw_q2 = nn.Parameter(torch.tensor(0.2).logit(), requires_grad=True)
+
+        # Other positive parameters (log-transformed)
+        self.v0 = nn.Parameter(torch.tensor(7.40).log(), requires_grad=True)
+        self.v1 = nn.Parameter(torch.tensor(15.0).log(), requires_grad=True)
+        self.v2 = nn.Parameter(torch.tensor(7.0).log(), requires_grad=True)
+        self.d0 = nn.Parameter(torch.tensor(0.00003).log(), requires_grad=True)
+        self.d1 = nn.Parameter(torch.tensor(0.0001).log(), requires_grad=True)
+        self.d2 = nn.Parameter(torch.tensor(0.0003).log(), requires_grad=True)
+        self.d3 = nn.Parameter(torch.tensor(2.8).log(), requires_grad=True)
+        '''
         # Parameters to learn with initial guesses
         self.p0 = nn.Parameter(torch.tensor(0.4, requires_grad=True))
         self.q0 = nn.Parameter(torch.tensor(0.4, requires_grad=True))
@@ -78,6 +95,7 @@ class SimpleDNN(nn.Module):
         self.v2 = nn.Parameter(torch.tensor(7.0, requires_grad=True))
         self.d2 = nn.Parameter(torch.tensor(0.0003, requires_grad=True))
         self.d3 = nn.Parameter(torch.tensor(2.8, requires_grad=True))
+        '''
 
     # forward pass through the NN layers
     def forward(self,x):
@@ -115,7 +133,19 @@ def loss_function(disc_t):
     # take auto grad and store the values to array mx4. This is the tensor of d\hat{y}/dt, essentially Jacobian or x_pred_concat
     for i in range(4):  # For each x_j
         dx_pred[:, i] = torch.autograd.grad(x_pred_concat[:, i], disc_t, grad_outputs=torch.ones_like(x_pred_concat[:, i]), create_graph=True)[0].squeeze()
+    
+    # Compute p_i, q_i, v_i, d_i manually in loss function
+    eps = 1e-6
+    p0 = torch.sigmoid(model.raw_p0) * (1 - eps)
+    q0 = torch.sigmoid(model.raw_q0) * (1 - p0 - eps)
+    p1 = torch.sigmoid(model.raw_p1) * (1 - eps)
+    q1 = torch.sigmoid(model.raw_q1) * (1 - p1 - eps)
+    p2 = torch.sigmoid(model.raw_p2) * (1 - eps)
+    q2 = torch.sigmoid(model.raw_q2) * (1 - p2 - eps)
 
+    v0, v1, v2 = torch.exp(model.v0), torch.exp(model.v1), torch.exp(model.v2)
+    d0, d1, d2, d3 = torch.exp(model.d0), torch.exp(model.d1), torch.exp(model.d2), torch.exp(model.d3)
+    '''
     # parameters
     p0 = model.p0
     q0 = model.q0
@@ -130,7 +160,7 @@ def loss_function(disc_t):
     v2 = model.v2
     d2 = model.d2
     d3 = model.d3
-    
+    '''
     # the right side
     f = torch.zeros_like(x_pred_concat) # initialize tensor the same dimension as x_pred (i.e.m by 4)
     f[:,0] = (p0-q0) * v0 * x_pred_concat[:,0] - (d0 *x_pred_concat[:,0])
