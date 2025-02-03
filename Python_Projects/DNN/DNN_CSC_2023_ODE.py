@@ -97,6 +97,16 @@ class SimpleDNN(nn.Module):
         self.d3 = nn.Parameter(torch.tensor(2.8, requires_grad=True))
         '''
 
+    def prob_param(self):
+        p0 = torch.sigmoid(model.raw_p0)
+        q0 = torch.sigmoid(model.raw_q0)
+        p1 = torch.sigmoid(model.raw_p1)
+        q1 = torch.sigmoid(model.raw_q1)
+        p2 = torch.sigmoid(model.raw_p2)
+        q2 = torch.sigmoid(model.raw_q2)
+        return p0, q0, p1, q1, p2, q2
+    def get_param(self):
+        return torch.exp(model.v0), torch.exp(model.d0), torch.exp(model.v1), torch.exp(model.d1), torch.exp(model.v2), torch.exp(model.d2), torch.exp(model.d3)
     # forward pass through the NN layers
     def forward(self,x):
         x = torch.relu(self.fc1(x))
@@ -135,13 +145,12 @@ def loss_function(disc_t):
         dx_pred[:, i] = torch.autograd.grad(x_pred_concat[:, i], disc_t, grad_outputs=torch.ones_like(x_pred_concat[:, i]), create_graph=True)[0].squeeze()
     
     # Compute p_i, q_i, v_i, d_i manually in loss function
-    eps = 1e-6
-    p0 = torch.sigmoid(model.raw_p0) * (1 - eps)
-    q0 = torch.sigmoid(model.raw_q0) * (1 - p0 - eps)
-    p1 = torch.sigmoid(model.raw_p1) * (1 - eps)
-    q1 = torch.sigmoid(model.raw_q1) * (1 - p1 - eps)
-    p2 = torch.sigmoid(model.raw_p2) * (1 - eps)
-    q2 = torch.sigmoid(model.raw_q2) * (1 - p2 - eps)
+    p0 = torch.sigmoid(model.raw_p0)
+    q0 = torch.sigmoid(model.raw_q0)
+    p1 = torch.sigmoid(model.raw_p1)
+    q1 = torch.sigmoid(model.raw_q1)
+    p2 = torch.sigmoid(model.raw_p2)
+    q2 = torch.sigmoid(model.raw_q2)
 
     v0, v1, v2 = torch.exp(model.v0), torch.exp(model.v1), torch.exp(model.v2)
     d0, d1, d2, d3 = torch.exp(model.d0), torch.exp(model.d1), torch.exp(model.d2), torch.exp(model.d3)
@@ -187,41 +196,46 @@ for epochs in range(epochs):
     loss.backward()
     optimizer.step()
     if epochs %20000==0:
+        p0, q0, p1, q1, p2, q2 = model.prob_param()
+        v0, d0, v1, d1, v2, d2, d3 = model.get_param()
+
         print(f"Epoch{epochs}, Loss:{loss.item()}, Total cells at each t_i:{total_pred}")
-        print(f"Parameter: p0: {model.p0}")
-        print(f"Parameter: q0: {model.q0}")
-        print(f"Parameter: v0: {model.v0}")
-        print(f"Parameter: d0: {model.d0}")
-        print(f"Parameter: p1: {model.p1}")
-        print(f"Parameter: q1: {model.q1}")
-        print(f"Parameter: v1: {model.v1}")
-        print(f"Parameter: d1: {model.d1}")
-        print(f"Parameter: p2: {model.p2}")
-        print(f"Parameter: q2: {model.q2}")
-        print(f"Parameter: v2: {model.v2}")
-        print(f"Parameter: d2: {model.d2}")
-        print(f"Parameter: d3: {model.d3}")
-    if abs(loss.item()) < 1e-4:
+        print(f"Parameter: p0: {p0.item()}")
+        print(f"Parameter: q0: {q0.item()}")
+        print(f"Parameter: v0: {v0.item()}")
+        print(f"Parameter: d0: {d0.item()}")
+        print(f"Parameter: p1: {p1.item()}")
+        print(f"Parameter: q1: {q1.item()}")
+        print(f"Parameter: v1: {v1.item()}")
+        print(f"Parameter: d1: {d1.item()}")
+        print(f"Parameter: p2: {p2.item()}")
+        print(f"Parameter: q2: {q2.item()}")
+        print(f"Parameter: v2: {v2.item()}")
+        print(f"Parameter: d2: {d2.item()}")
+        print(f"Parameter: d3: {d3.item()}")
+    if abs(loss.item()) < 1e-3:
         print(f"Epoch{epochs}, loss: {loss.item()} has converged")
         break
 
 with torch.no_grad():
     nn_output = model(disc_t)
     x_0_appx, x_1_appx, x_2_appx, x_3_appx, = trial_solution(disc_t,nn_output)
+    p0, q0, p1, q1, p2, q2 = model.prob_param()
+    v0, d0, v1, d1, v2, d2, d3 = model.get_param()
     print(f"FIANL PARAMETERS:\n")
-    print(f"Parameter: p0: {model.p0}")
-    print(f"Parameter: q0: {model.q0}")
-    print(f"Parameter: v0: {model.v0}")
-    print(f"Parameter: d0: {model.d0}")
-    print(f"Parameter: p1: {model.p1}")
-    print(f"Parameter: q1: {model.q1}")
-    print(f"Parameter: v1: {model.v1}")
-    print(f"Parameter: d1: {model.d1}")
-    print(f"Parameter: p2: {model.p2}")
-    print(f"Parameter: q2: {model.q2}")
-    print(f"Parameter: v2: {model.v2}")
-    print(f"Parameter: d2: {model.d2}")
-    print(f"Parameter: d3: {model.d3}")
+    print(f"Parameter: p0: {p0.item()}")
+    print(f"Parameter: q0: {q0.item()}")
+    print(f"Parameter: v0: {v0.item()}")
+    print(f"Parameter: d0: {d0.item()}")
+    print(f"Parameter: p1: {p1.item()}")
+    print(f"Parameter: q1: {q1.item()}")
+    print(f"Parameter: v1: {v1.item()}")
+    print(f"Parameter: d1: {d1.item()}")
+    print(f"Parameter: p2: {p2.item()}")
+    print(f"Parameter: q2: {q2.item()}")
+    print(f"Parameter: v2: {v2.item()}")
+    print(f"Parameter: d2: {d2.item()}")
+    print(f"Parameter: d3: {d3.item()}")
 
 t_vals = disc_t.detach().numpy()
 x_vals = x_0_appx.detach().numpy()
