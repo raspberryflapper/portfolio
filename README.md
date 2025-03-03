@@ -5,8 +5,9 @@ Welcome!
 Thanks for taking your time and viewing my portfolio. This is a porfolio to demonstrate a bit of
 what I have done and do in my research field and spare time with two main languages- Python and C++.
 Mainly, I use coding skills to optimize and fit data (e.g. lab data of tumor growth)
-and solve Ordinary Differential Equations, using well known methods such as Runge Kutta, finite difference, 
-and Euler's method. Recently, I have been using Deep Neural Network (DNN) with PyTorch to solve systems of ODEs.
+and solve Ordinary Differential Equations, using well known methods such as Deep learning, Runge Kutta, finite difference, 
+and Euler's method. My latest research and work is data driven, deep learning, approach of optimization and data fitting, using 
+Deep Neural Network (DNN) with PyTorch to solve systems of ODEs with free (unknown) parameters.
 Currently, my DNN algorithm can take in real-world lab data and solve a complex system of ODE/biological models
 with undetermined coefficients while finding the optimal values for the unknown parameters.
 
