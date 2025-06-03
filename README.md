@@ -13,7 +13,8 @@ with undetermined coefficients while finding the optimal values for the unknown 
 
 This reposit is divided into two main folders:
 
-In the Python folder -  you will find codes utilizing variety of numerical methods and algorithms, such as 
+In the Python folder - you will find my personal projects in the Quantitative Research field 
+and other codes utilizing variety of numerical methods and algorithms, such as 
 Gradient Descent, Steepest Gradient Descent, Newton's method, Thomas algorithm, and Bisection method, 
 for optimization, data fitting, and solving for the optimal learning rate. In addition, the folder with
 DNN algorithms contain algorithms developed for my current research papers. In different projects/codes,
