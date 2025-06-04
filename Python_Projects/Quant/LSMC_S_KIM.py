@@ -214,16 +214,17 @@ print("Final option cash flow: ",cash_flow_matrix) #print final option cash flow
 def calcFinalValue(final_matrix):
     disc_array = np.zeros(MC_paths)
     for rows in range(MC_paths):
-            for cols in range(N+1):
-                if final_matrix[rows,cols] != 0:
-                    disc_array[rows] = final_matrix[rows,cols] * np.exp(-mu*cols)
-                else:
-                    None
+        for cols in range(N+1):
+            if final_matrix[rows,cols] != 0:
+                disc_array[rows] = final_matrix[rows,cols] * np.exp(-mu*cols)
+            else:
+                None
     #print(disc_array)
     total_sum = sum(disc_array)
     final_value = total_sum / MC_paths
     return final_value
 final_option_value = calcFinalValue(cash_flow_matrix)
 print("This is the final option value: ",final_option_value)
+
 # comment out below if no visualization
 #graphStockPrice(disc_t,sim_stock_prices)
