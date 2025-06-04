@@ -104,11 +104,16 @@ def getPrices(stock,itm_indices):
 def ConstructITMVector(sim_stock_prices,N):
     indices = IdentifyPaths(sim_stock_prices,N) #tuple
     indices_array = np.array(indices)
-    row_num = indices_array[:,0]
-    itm_prices = getPrices(sim_stock_prices,indices) #1D array with ITM paths stock prices
-    itm_vector = np.zeros(MC_paths) #initialize the vector
-    itm_vector[row_num] = itm_prices #overwrite vector with itm stock prices in the corresponding indices
-    return itm_vector
+    #print("indices_array:", indices_array)
+    if indices_array.size == 0: #if no ITM paths are found in a given time step
+        return np.zeros(MC_paths)
+    else:
+        row_num = indices_array[:,0]
+        #print("row_num:", row_num)
+        itm_prices = getPrices(sim_stock_prices,indices) #1D array with ITM paths stock prices
+        itm_vector = np.zeros(MC_paths) #initialize the vector
+        itm_vector[row_num] = itm_prices #overwrite vector with itm stock prices in the corresponding indices
+        return itm_vector
 
 def calcITMPayoff(strike,sim):
     payoff = strike - sim
