@@ -286,7 +286,7 @@ v_s_minus_epsilon_value = OptValueMinusEpsilon()
 #print("v_s_minus_epsilon",v_s_minus_epsilon_value)
 
 def calcVega(add_ep,minus_ep):
-    vega = (add_ep - minus_ep) / 2*epsilon_vega
+    vega = (add_ep - minus_ep) / (2*epsilon_vega)
     return vega
 final_vega = calcVega(v_s_add_epsilon_value,v_s_minus_epsilon_value)
 print("final_vega: ",final_vega)
@@ -333,7 +333,7 @@ rho_minus_final = OptValueRhoMinus()
 #print("rho minus: ",rho_minus_final)
 
 def calcRho(rho_add,rho_minus):
-    final_rho = (rho_add-rho_minus) / 2*epsilon_rho
+    final_rho = (rho_add-rho_minus) / (2*epsilon_rho)
     return final_rho
 final_rho_value = calcRho(rho_add_final,rho_minus_final)
 print("rho final: ",final_rho_value)
