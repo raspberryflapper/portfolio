@@ -15,9 +15,7 @@ DNN algorithms (portfolio/Python_Projects/DNN) contain algorithms developed for 
 experience with PyTorch.
 
 2) C++_Projects: you may find implementations of numerical methods such as Newton's and Secant methods, and Chebyshev polynomials and Lagrange
-interpolation. Mainly, these codes were written for a numerical methods class,
-after I have taken considerable amount of time off from C++ coding, so I preemptively apologize for their unpolishedness. Newer C++ projects,
-such as data fitting and analytics problems that can be found at Hackerrank will be uploaded soon. 
+interpolation. Newer C++ projects, such as data fitting and analytics problems that can be found at Hackerrank will be uploaded soon. 
 
 Again, thank you for taking your time and reading. I look forward to any feedback or collaborations.
 
